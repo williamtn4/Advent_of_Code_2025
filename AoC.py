@@ -41,6 +41,24 @@ hit = np.zeros(N, dtype=int)
 for i in range(N):
 	dial_value, hit[i] = move_dial(dial_value,rotation_directions[i],dial_distance[i])
 passcode = sum(hit)
-print("Passcode for secret entrance: {}".format(passcode))
+# print("Passcode for secret entrance: {}".format(passcode))
 
 # --- Day 2 ---
+number = '238238238'
+def find_invalid(number: str):
+	n = len(number)
+	if np.mod(n,2) == 1 and all(np.isin(number,number[0])):
+		invalid = int(number)
+	else:
+		arr = [char for char in number]
+		while len(arr) > 2:
+			arr = [arr[i] + arr[i+1] for i in range(0,len(arr),2)]
+			print(arr)
+			if all(np.isin(arr,arr[0])):
+				invalid = int(number)
+			else:
+				pass
+	return invalid
+
+invalid = find_invalid(number)
+print(invalid)
