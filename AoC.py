@@ -51,9 +51,7 @@ def find_invalid(number,repeat_times):
 	invalid = 0
 	n = len(arr)
 
-	if np.mod(n,2) == 1:
-		exit
-	elif all(np.isin(arr,arr[0])):
+	if np.mod(n,2) == 1 and all(np.isin(arr,arr[0])):
 		invalid = int(number)
 	else:
 		digit_factors = set()
@@ -63,13 +61,11 @@ def find_invalid(number,repeat_times):
 				digit_factors.add(i)
 				digit_factors.add(n // i)
 			i += 1
+		digit_factors = sorted(digit_factors)
 		if repeat_times != None:
-			for i,factor in enumerate(digit_factors):
-				if n/repeat_times == factor:
-					digit_factors = [factor]
-				else:
-					digit_factors = sorted(digit_factors)
-					digit_factors = digit_factors[1:-1]
+			digit_factors = [digit_factors[-repeat_times]]
+		else:
+			digit_factors = digit_factors[1:-1]
 		N = len(digit_factors)
 		
 		for j in range(N):
