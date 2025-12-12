@@ -1,7 +1,7 @@
 import numpy as np
 
 # --- Day 1 ---
-with open('test.txt', 'r') as f:
+with open('Input_d1.txt', 'r') as f:
 	lines = [line.split()[0] for line in f]
 
 N = len(lines)
@@ -25,23 +25,24 @@ def move_dial(initial_value,rotation_direction, adjust_value):
 
 	new_value = initial_value + pol*adjust_value
 	full_rot = int(new_value/100)
-	remainder = np.mod(new_value)
-	print(new_value,full_rot)
-	if full_rot != 0 and new_value != 0:
-		hit += abs(full_rot)
-		new_value = np.mod(new_value, 100)
-	elif full_rot != 0 and 
 	
+	if full_rot != 0:
+		hit += abs(full_rot)
+		if new_value < 0:
+			new_value = 100 + (new_value - full_rot*100)
+		elif new_value > 0:
+			new_value = new_value - full_rot*100
+		else:
+			hit += 1
+	elif full_rot == 0:
+		if initial_value*new_value < 0:
+			hit += 1
+			new_value = 100 - new_value
+		elif new_value == 0:
+			hit += 1
+		else:
+			pass
 
-
-	if new_value < 0:
-		new_value = 100 + new_value
-		hit += 1
-	elif new_value == 0:
-		hit += 1
-	else:
-		pass
-	print(hit)
 	return new_value, hit
 
 dial_value = 50
