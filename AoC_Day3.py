@@ -10,9 +10,9 @@ def find_joltage(input):
 	
 	# Get unique values in array and see if the max value of the array repeats twice
 	unique_batt, unique_key, counts = np.unique(batt_bank_sorted, return_index=True, return_counts=True)
-
-	if counts[-1] > 1:
-		joltage = unique_batt[-1]*11
+	print(batt_bank,batt_bank_sorted,unique_batt,unique_key, counts)
+	if counts[-1] > 11:
+		joltage = unique_batt[-1]*111111111111
 		return joltage
 
 	# Case 1: Largest is before second largest
@@ -35,7 +35,7 @@ def find_joltage(input):
 	return joltage
 
 
-with open('input_d3.txt','r') as f:
+with open('test.txt','r') as f:
 	lines = f.readlines()
 	batt_bank_list = []
 	for line in lines:
